@@ -23,10 +23,10 @@ midSize = size*size
 midlo  = int((midSize-1)/2)
 
 # pic = input("input boardSaltPepper.bmp pepperNoise.bmp SaltNoise.bmp and gaussianNoise.bmp :")
-pic = 'gaussianNoise.bmp'
+pic = 'SaltNoise.bmp'
 
 # q = input("input q for Contraharmonic Mean Filter :")
-q = 1.5
+q = -2
 d = 2
 
 img = Image.open(pic)
@@ -63,27 +63,19 @@ for i in range(0+limit,len(img)-limit):
                 if nC < min:
                     min = nC
 
+                # print nC,s2,q
+                
+                if nC is 0 and q+1.0 < 0:
+                    s1 += 0
+                else:
+                    s1 += nC**(q+1.0)
 
-                if q > 0 :     
-                    s1 += math.pow(nC, q+1.0)
-                    s2 += math.pow(nC, q)
-                else :
-                    tq = q*-1
-                    
-                    ts1 = math.pow(nC, tq+1.0)
-                    
-                    ts2 = math.pow(nC, tq)
-
-                    
-                    if ts1 == 0 :
-                        s1 += 0
-                    else:
-                        s1 += 1/ts1
-                        
-                    if ts2 == 0:
-                        s2 += 0
-                    else:
-                        s2 += 1/ts2
+                if nC is 0 and q < 0:
+                    s2 += 0
+                else:
+                    s2 += nC**q
+                
+        # print(s1 , ' ', s2)
         if s2==0 :
             Contra[i][j] = setGrayColor(0)
         else : 
@@ -92,7 +84,7 @@ for i in range(0+limit,len(img)-limit):
 
         MaxFilter[i][j] = setGrayColor(max)
         MinFilter[i][j] = setGrayColor(min)
-        MidFilter[i][j] = setGrayColor(1/2*(max+min))
+        MidFilter[i][j] = setGrayColor(1/2.0*(max+min))
 
         num.sort()
         num.pop(0)
