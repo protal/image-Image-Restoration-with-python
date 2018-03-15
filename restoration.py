@@ -23,7 +23,7 @@ midSize = size*size
 midlo  = int((midSize-1)/2)
 
 # pic = input("input boardSaltPepper.bmp pepperNoise.bmp SaltNoise.bmp and gaussianNoise.bmp :")
-pic = 'boardSaltPepper.bmp'
+pic = 'gaussianNoise.bmp'
 
 # q = input("input q for Contraharmonic Mean Filter :")
 q = 1.5
